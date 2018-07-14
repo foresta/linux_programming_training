@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+#define BUFFER_SIZE 2048
+
+static void do_cat(FILE* input);
+
+int main (int argc, char *argv[])
+{
+    if (argc == 1) {
+        do_cat(stdin);
+    }
+    else {
+        int i;
+        for (i = 1; i < argc; i++) {
+            char* path =  argv[i];
+            FILE* f = fopen(path, "r");
+            if (!f) {
+                perror(path);
+                exit(1);
+            }
+            do_cat(f);
+            fclose(f);
+        }
+    }
+
+    exit(0);
+}
+
+static void do_cat(FILE* f)
+{
+    int c;
+    while((c = fgetc(f)) != EOF) {
+        if (putchar(c) < 0) exit(1);
+    }
+}
