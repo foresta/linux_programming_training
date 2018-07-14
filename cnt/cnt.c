@@ -26,12 +26,17 @@ int main(int argc, char* argv[])
 
 static int do_line_count(FILE* f)
 {
-    int lineCount = 0;
     int c;
+    int prev = '\n';
+
+    int lineCount = 0;
     while((c = fgetc(f)) != EOF) {
-       char character = (char) c; 
-       if (character == '\n') lineCount++;
+       if (c== '\n') lineCount++;
+
+       prev = c;
     }
+
+    if (prev != '\n') lineCount++;
   
     return lineCount;
 }
