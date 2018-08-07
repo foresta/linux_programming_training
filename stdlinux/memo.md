@@ -81,7 +81,7 @@ void clearerr(FILE* stream) // streamのerror, EOFをクリア(tail -fなど)
 
 
 ## オプション解析
-getopt, getopt_long はGNU libc特有なので、LinuxOS以外では使えないと思っておいた方が良い
+getopt, getopt\_long はGNU libc特有なので、LinuxOS以外では使えないと思っておいた方が良い
 
 ## gdb
 
